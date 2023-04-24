@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "293544890336",
+    "project_id": "authentication-bd35d",
+    "storage_bucket": "authentication-bd35d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293544890336:android:3a98f80b2d364aaabea585",
+        "android_client_info": {
+          "package_name": "com.example.cryptowatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293544890336-hlhp04ohse39aup2oct67ou87k6tsbu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDQ_6oVo4UQCjr9DVRR_xHR9CB_5Bvq4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293544890336-hlhp04ohse39aup2oct67ou87k6tsbu7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "293544890336-0oie3quda6gd2o7qgp8tce6kgjjnnibs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cryptowatcher"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
