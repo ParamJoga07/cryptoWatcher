@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cryptowatcher/model/user_model.dart';
+import 'package:cryptowatcher/onboarding/onboardingscreen1.dart';
+import 'package:cryptowatcher/pagelogin.dart';
 import 'package:cryptowatcher/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -98,16 +100,18 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // DATABASE OPERTAIONS
-  Future<bool> checkExistingUser() async {
+  Future<Object> checkExistingUser() async {
     DocumentSnapshot snapshot =
         await _firebaseFirestore.collection("users").doc(_uid).get();
     if (snapshot.exists) {
       print("USER EXISTS");
-      return true;
+      checkUserActivity();
+
+      return const OnboardingScreen1();
     } else {
       print("NEW USER");
-      return false;
+      checkUserActivity();
+      return const OnboardingScreen1();
     }
   }
 
@@ -194,3 +198,54 @@ class AuthProvider extends ChangeNotifier {
     s.clear();
   }
 }
+
+Future<bool> checkUserActivity() async {
+  bool isActive = false;
+
+  // Get the user's Firebase Authentication ID token
+  String? idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+  print(idToken);
+
+  http.Response response = await http
+      .get(Uri.parse('m'), headers: {'Authorization': 'Bearer $idToken'});
+
+  // Parse the response and set the isActive variable based on the server's response
+  if (response.statusCode == 200) {
+    Map<String, dynamic> data = json.decode(response.body);
+    isActive = data['isActive'];
+  }
+
+  return isActive;
+}
+
+
+
+
+
+// exports.checkUserActivity = functions.https.onRequest(async (req, res) => {
+//   try {
+//     // Get the ID token from the Authorization header
+//     const authHeader = req.headers.authorization;
+//     const idToken = authHeader.split('Bearer ')[1];
+    
+//     // Verify the ID token and get the user's UID
+//     const decodedToken = await admin.auth().verifyIdToken(idToken);
+//     const uid = decodedToken.uid;
+    
+//     // Get the user's document from Firestore
+//     const userDoc = await admin.firestore().collection('users').doc(uid).get();
+    
+//     // Check if the user's last active time is within the last 5 minutes
+//     const lastActiveTime = userDoc.data().lastActiveTime;
+//     const currentTime = new Date().getTime();
+//     const timeDifference = (currentTime - lastActiveTime) / (1000 * 60); // in minutes
+//     const isActive = timeDifference <= 5;
+    
+//     // Send the response with the isActive status
+//     res.status(200).json({ isActive: isActive });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
+

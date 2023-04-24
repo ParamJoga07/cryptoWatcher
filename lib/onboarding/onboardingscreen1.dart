@@ -1,14 +1,7 @@
-// import 'package:cryptowatcher/onboarding/graph/sidepanel/sidepanel.dart';
-// import 'package:cryptowatcher/onboarding/graph/source/source.dart';
-// import 'package:cryptowatcher/onboarding/landingpage1.dart';
-// import 'package:cryptowatcher/onboarding/landingpage2.dart';
-import 'package:cryptowatcher/front/frontpage1.dart';
-
 import 'package:cryptowatcher/onboarding/design.dart';
 import 'package:cryptowatcher/onboarding/navbar/navbar.dart';
 import 'package:cryptowatcher/onboarding/page1.dart';
 import 'package:cryptowatcher/onboarding/page2.dart';
-// import 'package:cryptowatcher/onboarding/page3.dart';
 import 'package:cryptowatcher/onboarding/page4.dart';
 
 import 'package:flutter/material.dart';
@@ -22,10 +15,6 @@ class OnboardingScreen1 extends StatefulWidget {
 
 class _OnboardingScreen1State extends State<OnboardingScreen1> {
   final List<Widget> _pages = [
-    // const DayAndNightSwitch(),
-    // Login(),
-
-    const FrontPage1(),
     const CryptoPage(),
     const Page1(),
     const Page2(),
