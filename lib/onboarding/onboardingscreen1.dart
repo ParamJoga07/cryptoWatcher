@@ -1,4 +1,6 @@
+import 'package:cryptowatcher/calender/lib/main.dart';
 import 'package:cryptowatcher/onboarding/design.dart';
+import 'package:cryptowatcher/onboarding/landingpage2.dart';
 import 'package:cryptowatcher/onboarding/navbar/navbar.dart';
 import 'package:cryptowatcher/onboarding/page1.dart';
 import 'package:cryptowatcher/onboarding/page2.dart';
@@ -16,8 +18,13 @@ class OnboardingScreen1 extends StatefulWidget {
 class _OnboardingScreen1State extends State<OnboardingScreen1> {
   final List<Widget> _pages = [
     const CryptoPage(),
+    CalenderPage(),
+
+    // CalenderEvents(),
     const Page1(),
     const Page2(),
+    DayAndNightSwitch(),
+
     // const SwipeToDeleteArchive(),
     const Page4(),
     Example(),

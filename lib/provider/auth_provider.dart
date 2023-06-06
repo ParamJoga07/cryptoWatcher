@@ -105,12 +105,14 @@ class AuthProvider extends ChangeNotifier {
         await _firebaseFirestore.collection("users").doc(_uid).get();
     if (snapshot.exists) {
       print("USER EXISTS");
-      checkUserActivity();
+      String? idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+      print(idToken);
 
       return const OnboardingScreen1();
     } else {
       print("NEW USER");
-      checkUserActivity();
+      String? idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+      print(idToken);
       return const OnboardingScreen1();
     }
   }
@@ -199,24 +201,24 @@ class AuthProvider extends ChangeNotifier {
   }
 }
 
-Future<bool> checkUserActivity() async {
-  bool isActive = false;
+// Future<bool> checkUserActivity() async {
+//   bool isActive = false;
 
-  // Get the user's Firebase Authentication ID token
-  String? idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
-  print(idToken);
+//   // Get the user's Firebase Authentication ID token
+//   String? idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+//   print(idToken);
 
-  http.Response response = await http
-      .get(Uri.parse('m'), headers: {'Authorization': 'Bearer $idToken'});
+//   http.Response response = await http
+//       .get(Uri.parse('m'), headers: {'Authorization': 'Bearer $idToken'});
 
-  // Parse the response and set the isActive variable based on the server's response
-  if (response.statusCode == 200) {
-    Map<String, dynamic> data = json.decode(response.body);
-    isActive = data['isActive'];
-  }
+//   // Parse the response and set the isActive variable based on the server's response
+//   if (response.statusCode == 200) {
+//     Map<String, dynamic> data = json.decode(response.body);
+//     isActive = data['isActive'];
+//   }
 
-  return isActive;
-}
+//   return isActive;
+// }
 
 
 

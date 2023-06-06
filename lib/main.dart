@@ -1,3 +1,4 @@
+import 'package:cryptowatcher/onboarding/onboardingscreen1.dart';
 import 'package:cryptowatcher/pagelogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       color: Colors.black,
-      home: const PageLogin(),
+      home: const OnboardingScreen1(),
     );
   }
 }
